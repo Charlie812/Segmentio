@@ -38,9 +38,9 @@ class BadgeViewPresenter {
     }
     
     fileprivate func setupBadgeConstraints(_ badgeView: BadgeWithCounterView, counterValue: Int) {
-        var constraintConstant:CGFloat = 1.0
+        var constraintConstant = getBadgeConstraintConstant()
         if counterValue > 9 {
-            constraintConstant = 3.0
+            constraintConstant += 2.0
         }
         let segmentTitleLabelHorizontalCenterConstraint =
             NSLayoutConstraint(
@@ -65,6 +65,20 @@ class BadgeViewPresenter {
         )
         segmentTitleLabelHorizontalCenterConstraint.isActive = true
         segmentTitleLabelVerticalCenterConstraint.isActive = true
+    }
+    
+    private func getBadgeConstraintConstant() -> CGFloat {
+        let sreenWidth = UIScreen.main.bounds.width
+        switch sreenWidth {
+        case 414:
+            return 1.0
+        case 375:
+            return 3.0
+        case 320:
+            return 4.0
+        default:
+            return 0.0
+        }
     }
     
 }
